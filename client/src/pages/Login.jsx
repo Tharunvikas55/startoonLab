@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 const baseURL = process.env.REACT_APP_API_URL;
-console.log(baseURL);
+// console.log(baseURL);
 
 const Login = () => {
     const [email,setEmail]=useState()
