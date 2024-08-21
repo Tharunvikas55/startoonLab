@@ -27,18 +27,44 @@ exports.getUserDashboard = async (req, res) => {
 };
 
 // Controller for admin dashboard
+// exports.getAdminDashboard = async (req, res) => {
+//     try {
+//         const keyword = req.query.keyword;
+
+//         const query = {
+//             isAdmin: false,
+//             ...(keyword ? { name: { $regex: keyword, $options: 'i' } } : {}),
+//         };
+
+//         const users = await UserModel.find(query, { isAdmin: 0 }); // Exclude isAdmin field
+//         res.json({ valid: true, users });
+//     } catch (err) {
+//         res.status(500).json({ valid: false, message: "Internal Server Error", error: err.message });
+//     }
+// };
 exports.getAdminDashboard = async (req, res) => {
     try {
-        const keyword = req.query.keyword;
+        const query = req.query.keyword
+            ? { 
+                name: { 
+                    $regex: req.query.keyword,
+                    $options: 'i'
+                },
+                isAdmin: false 
+            }
+            : { isAdmin: false };
 
-        const query = {
-            isAdmin: false,
-            ...(keyword ? { name: { $regex: keyword, $options: 'i' } } : {}),
-        };
+        // console.log(query);
 
-        const users = await UserModel.find(query, { isAdmin: 0 }); // Exclude isAdmin field
+        const users = await UserModel.find(query).select('-isAdmin'); // Exclude isAdmin field
+
+        if (!users.length) {
+            return res.status(404).json({ valid: false, message: "No users found" });
+        }
+
         res.json({ valid: true, users });
     } catch (err) {
         res.status(500).json({ valid: false, message: "Internal Server Error", error: err.message });
     }
 };
+

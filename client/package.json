@@ -13,10 +13,13 @@
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
     "chart.js": "^4.4.4",
+    "lottie-web": "^5.12.2",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.10.4",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.52.1",
+    "react-lottie": "^1.2.4",
     "react-router-dom": "^6.24.1"
   },
   "devDependencies": {

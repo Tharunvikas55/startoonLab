@@ -3,6 +3,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const connectDB = require('./config/db');
+const createAdmin = require('./utils/adminSetup');  
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 
@@ -19,6 +20,9 @@ app.use(cookieParser());
 
 // Connect to DB
 connectDB();
+
+// Create Admin User
+createAdmin(); 
 
 // Routes
 app.use('/api', authRoutes);

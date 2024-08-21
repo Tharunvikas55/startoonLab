@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
+const baseURL = import.meta.env.VITE_BASE_URL;
+
 const Login = () => {
     const [email,setEmail]=useState()
     const [password,setPassword]=useState()
@@ -26,7 +28,7 @@ const Login = () => {
       const errors = validate();
       if (Object.keys(errors).length === 0) {
           try {
-              const response = await axios.post('http://localhost:3001/api/login', { email, password });
+              const response = await axios.post(baseURL+'/login', { email, password });
               if (response.data.Login) {
                   navigate(response.data.user.isAdmin ? '/admin-dashboard' : '/dashboard');
               } else {
@@ -47,14 +49,6 @@ const Login = () => {
     <div className="row ">
     <div className="col">
   <div style={{ width: '100%', height: '100%' }}className='justify-content-center'>
-    {/* <lottie-player 
-      src="https://lottie.host/67f45982-ab4f-47be-8ea9-5a488afcf5c9/0JYkhFYZsT.json"
-      background="transparent"
-      speed="2"
-      autoplay
-      direction="1"
-      mode="normal">
-    </lottie-player> */}
     <lottie-player src="https://lottie.host/488a2be1-dcbb-4af0-addd-e06a2c6ef006/6BIY1C4bBD.json" 
     background="##fff" speed="1" loop autoplay direction="1" mode="normal"></lottie-player>
   </div>

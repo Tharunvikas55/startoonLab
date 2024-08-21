@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
+const baseURL = import.meta.env.VITE_BASE_URL;
+
 const Register = () => {
     const [name, setName] = useState()
     const [gender, setGender] = useState('')
@@ -38,7 +40,7 @@ const Register = () => {
       e.preventDefault()
       const errors = validate()
       if (Object.keys(errors).length === 0) {
-        axios.post('http://localhost:3001/api/register', { name, gender, email, password })
+        axios.post(baseURL+'/register', { name, gender, email, password })
           .then(res => {
             console.log(res)
             navigate('/login')
