@@ -1,65 +1,3 @@
-// // src/pages/ChartPage.jsx
-// import React from 'react';
-// import { Bar } from 'react-chartjs-2';
-// import 'chart.js/auto';
-// import { useLocation } from 'react-router-dom';
-// import Search from "../components/Search";
-// import NavBar from '../components/NavBar';
-
-// const ChartPage = () => {
-//   const location = useLocation();
-//   const { chartData } = location.state || {};
-
-  
-//   if (!chartData) {
-//     return <div>No data available</div>;
-//   }
-
-
-
-//   return (
-//     <div className="container">
-//        <NavBar/> 
-//       <h2>User Login Chart</h2>
-//       <figure className="figure"style={{width: '50%', height: '50%'}}>
-//       <Bar data={chartData} />
-// </figure>
-//     </div>
-//   );
-// };
-
-// export default ChartPage;
-
-
-
-// import React from 'react';
-// import { Bar } from 'react-chartjs-2';
-// import 'chart.js/auto';
-// import { useLocation } from 'react-router-dom';
-// import NavBar from '../components/NavBar';
-
-// const ChartPage = () => {
-//   const location = useLocation();
-//   const { chartData,totalUser } = location.state || {};
-
-//   if (!chartData) {
-//     return <div>No data available</div>;
-//   }
-
-//   return (
-//     <div className="container">
-//       <NavBar /> 
-//       <h2>User Login Chart</h2>
-//       <p>Total Users: {totalUser}</p> {/* Display totalUser */}
-//       <figure className="figure" style={{ width: '50%', height: '50%' }}>
-//         <Bar data={chartData} />
-//       </figure>
-//     </div>
-//   );
-// };
-
-// export default ChartPage;
-
 
 import React, { useState } from 'react';
 import { Bar } from 'react-chartjs-2';
@@ -115,7 +53,6 @@ const ChartPage = () => {
         }]
       };
     } else {
-      // Default to daily
       return chartData;
     }
   };

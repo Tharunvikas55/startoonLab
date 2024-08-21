@@ -48,7 +48,7 @@ const Profile = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('http://localhost:3001/dashboard', { withCredentials: true })
+    axios.get('http://localhost:3001/api/dashboard', { withCredentials: true })
       .then(res => {
         if (res.data.valid) {
           setUser(res.data.user);
@@ -76,7 +76,7 @@ const Profile = () => {
     const handleLogout = async (e) => {
         e.preventDefault();
         try {
-          const res = await axios.post('http://localhost:3001/logout');
+          const res = await axios.post('http://localhost:3001/api/logout');
           if (res.data.success) {
             navigate('/login');
           } else {

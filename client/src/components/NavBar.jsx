@@ -79,7 +79,7 @@ const NavBar = ({  formatDataForChart,totalUser }) => {
   const handleLogout = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:3001/logout');
+      const res = await axios.post('http://localhost:3001/api/logout');
       if (res.data.success) {
         navigate('/login');
       } else {

@@ -122,7 +122,7 @@ const AdminDashboard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('http://localhost:3001/admin-dashboard', { withCredentials: true })
+    axios.get('http://localhost:3001/api/admin-dashboard', { withCredentials: true })
       .then(res => {
         if (res.data.valid) {
           setUsers(res.data.users);
@@ -163,7 +163,7 @@ const AdminDashboard = () => {
   const handleLogout = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:3001/logout');
+      const res = await axios.post('http://localhost:3001/api/logout');
       if (res.data.success) {
         navigate('/login');
       } else {
