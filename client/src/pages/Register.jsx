@@ -38,7 +38,7 @@ const Register = () => {
       e.preventDefault()
       const errors = validate()
       if (Object.keys(errors).length === 0) {
-        axios.post('http://localhost:3001/register', { name, gender, email, password })
+        axios.post('http://localhost:3001/api/register', { name, gender, email, password })
           .then(res => {
             console.log(res)
             navigate('/login')
@@ -77,8 +77,6 @@ const Register = () => {
                 {errors.name && <div className="invalid-feedback">{errors.name}</div>}
                 </div>
               </div>
-
-
               <div className="col-12">
                 <div className='form-floating mb-2'>          
                 <input type="text" className={`form-control ${errors.email ? 'is-invalid' : ''}`} name='email' autoComplete='off' placeholder=" " onChange={(e)=>setEmail(e.target.value)} />
@@ -86,15 +84,13 @@ const Register = () => {
                 {errors.email && <div className="invalid-feedback">{errors.email}</div>}
                 </div>
               </div>
-
               <div className="col-12">
                 <div className='form-floating mb-2'>          
                 <input type="password" className={`form-control ${errors.password ? 'is-invalid' : ''}`} name='password' autoComplete='off' placeholder=" " onChange={(e)=>setPassword(e.target.value)} />
                 <label className="form-label">Password</label>
                 {errors.password && <div className="invalid-feedback">{errors.password}</div>}
                 </div>
-              </div>
-             
+              </div>             
               <div className="col-12">
                 <label className="form-label">Gender</label><br/>
                   <div className="form-check">
@@ -108,29 +104,15 @@ const Register = () => {
                     <label className="form-check-label" htmlFor="genderFemale">
                       Female
                     </label>
-                  </div>
-                  
+                  </div>                  
                   {errors.gender && <div className="invalid-feedback d-block">{errors.gender}</div>}
               </div>
-              {/* <div className="col-12">
-                <div className="d-grid">
-                  <button className="btn bsb-btn-xl btn-success" type="submit">Sign Up</button>
-                </div>
-              </div> */}
               <div className="col-12 d-flex justify-content-between">
                       <button className="btn bsb-btn-xl btn-success" type="submit">Sign Up</button>
                       <Link className="btn bsb-btn-2xl btn-danger" to={'/login'}>Sign In</Link>
                 </div>
             </div>
           </form>
-          {/* <div className="row">
-            <div className="col-12">
-              <hr className="mt-5 mb-4 border-secondary-subtle" />
-              <div className='d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-end'>
-                <p>Already have an account? <Link  className="ink-secondary text-decoration-none" to={'/login'} >Sign in</Link></p>
-              </div>
-            </div>
-          </div> */}
         </div>
       </div>
     </div>

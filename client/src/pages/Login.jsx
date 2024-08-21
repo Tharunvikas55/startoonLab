@@ -26,7 +26,7 @@ const Login = () => {
       const errors = validate();
       if (Object.keys(errors).length === 0) {
           try {
-              const response = await axios.post('http://localhost:3001/login', { email, password });
+              const response = await axios.post('http://localhost:3001/api/login', { email, password });
               if (response.data.Login) {
                   navigate(response.data.user.isAdmin ? '/admin-dashboard' : '/dashboard');
               } else {
