@@ -3,7 +3,8 @@ const jwt = require('jsonwebtoken');
 const UserModel = require('../models/User');
 const { jwtAccessTokenSecret, jwtRefreshTokenSecret, accessTokenExpiry, refreshTokenExpiry } = require('../config/auth');
 
-const login = async (req, res,next) => {
+// Login Function
+const login = async (req, res, next) => {
     const { email, password } = req.body;
 
     try {
@@ -13,8 +14,8 @@ const login = async (req, res,next) => {
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return res.json({ Login: false, message: "Password Incorrect" });
 
-        const accessToken = jwt.sign({ email, isAdmin: user.isAdmin }, Tharun-access-token-secret-key, { expiresIn: accessTokenExpiry });
-        const refreshToken = jwt.sign({ email, isAdmin: user.isAdmin }, Tharun-refresh-token-secret-key, { expiresIn: refreshTokenExpiry });
+        const accessToken = jwt.sign({ email, isAdmin: user.isAdmin }, jwtAccessTokenSecret, { expiresIn: accessTokenExpiry });
+        const refreshToken = jwt.sign({ email, isAdmin: user.isAdmin }, jwtRefreshTokenSecret, { expiresIn: refreshTokenExpiry });
 
         res.cookie("accessToken", accessToken, { maxAge: 300000, httpOnly: true, secure: true, sameSite: 'strict' });
         res.cookie("refreshToken", refreshToken, { maxAge: 1800000, httpOnly: true, secure: true, sameSite: 'strict' });
@@ -25,10 +26,12 @@ const login = async (req, res,next) => {
 
         res.json({ Login: true, user: { name: user.name, email: user.email, isAdmin: user.isAdmin } });
     } catch (err) {
-        res.status(500).json({ Login: false, message: "Error finding user", error: err.message });
+        console.error("Error in login process:", err);
+        res.status(500).json({ Login: false, message: "Error during login process", error: err.message });
     }
 };
 
+// Register Function
 const register = async (req, res) => {
     const { name, gender, email, password } = req.body;
 
@@ -37,10 +40,12 @@ const register = async (req, res) => {
         const user = await UserModel.create({ name, gender, email, password: hashedPassword });
         res.status(201).json(user);
     } catch (error) {
+        console.error("Error in registration process:", error);
         res.status(500).json({ error: error.message });
     }
 };
 
+// Logout Function
 const logout = (req, res) => {
     res.clearCookie('accessToken');
     res.clearCookie('refreshToken');
