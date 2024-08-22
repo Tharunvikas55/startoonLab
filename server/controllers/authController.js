@@ -13,8 +13,8 @@ const login = async (req, res,next) => {
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return res.json({ Login: false, message: "Password Incorrect" });
 
-        const accessToken = jwt.sign({ email, isAdmin: user.isAdmin }, jwtAccessTokenSecret, { expiresIn: accessTokenExpiry });
-        const refreshToken = jwt.sign({ email, isAdmin: user.isAdmin }, jwtRefreshTokenSecret, { expiresIn: refreshTokenExpiry });
+        const accessToken = jwt.sign({ email, isAdmin: user.isAdmin }, Tharun-access-token-secret-key, { expiresIn: accessTokenExpiry });
+        const refreshToken = jwt.sign({ email, isAdmin: user.isAdmin }, Tharun-refresh-token-secret-key, { expiresIn: refreshTokenExpiry });
 
         res.cookie("accessToken", accessToken, { maxAge: 300000, httpOnly: true, secure: true, sameSite: 'strict' });
         res.cookie("refreshToken", refreshToken, { maxAge: 1800000, httpOnly: true, secure: true, sameSite: 'strict' });
