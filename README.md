@@ -1,4 +1,6 @@
-# startoonLab
+# startoonLab Assignment
+
+Your task is to create a full-stack web application with the following instructions. The application is a dashboard use to view certain user details with both user and admin roles
 
 ![image](https://github.com/user-attachments/assets/90b94beb-a094-4fc3-b606-8b7ff3fff91b)
 
