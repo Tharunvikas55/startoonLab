@@ -26,10 +26,24 @@ const AdminDashboard = () => {
           const totalClicks = res.data.users.reduce((total, user) => total + user.count, 0);
           setTotalClickCount(totalClicks);
         } else {
+          console.error('Invalid response:', res.data);
           navigate('/login');
         }
       } catch (err) {
-        console.error('Error fetching users:', err);
+        // Log more detailed error information
+        if (err.response) {
+          // The request was made, and the server responded with a status code that falls out of the range of 2xx
+          console.error('Error response:', err.response.data);
+          console.error('Error status:', err.response.status);
+          console.error('Error headers:', err.response.headers);
+        } else if (err.request) {
+          // The request was made, but no response was received
+          console.error('Error request:', err.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.error('Error message:', err.message);
+        }
+        console.error('Error config:', err.config);
         navigate('/login');
       } finally {
         setLoading(false);
