@@ -4,20 +4,17 @@ import 'chart.js/auto';
 import { useLocation } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 
-const baseURL = process.env.REACT_APP_API_URL;
-
 const ChartPage = () => {
   const location = useLocation();
-  const { chartData, totalUser, totalClickCount } = location.state || {};
+  const { chartData = {}, totalUser = 0, totalClickCount = 0 } = location.state || {};
 
-  const [view, setView] = useState('daily'); // Default view
-  const [selectedMonth, setSelectedMonth] = useState(''); // State for selected month
+  const [view, setView] = useState('daily');
+  const [selectedMonth, setSelectedMonth] = useState('');
 
   const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  const quarters = ['Q1', 'Q2', 'Q3', 'Q4'];
 
   const formatDataForView = () => {
-    const data = { ...chartData };
+    if (!chartData.labels || !chartData.datasets) return { labels: [], datasets: [] };
 
     if (view === 'yearly') {
       const countsByMonth = {};
@@ -42,7 +39,7 @@ const ChartPage = () => {
         const dateObj = new Date(date);
         const year = dateObj.getFullYear();
         const month = dateObj.getMonth();
-        const quarter = Math.floor(month / 3) + 1; 
+        const quarter = Math.floor(month / 3) + 1;
         const key = `${year}-Q${quarter}`;
         countsByQuarter[key] = (countsByQuarter[key] || 0) + chartData.datasets[0].data[index];
       });
@@ -78,10 +75,10 @@ const ChartPage = () => {
           }]
         };
       } else {
-        return data;
+        return chartData;
       }
     } else {
-      return data;
+      return chartData;
     }
   };
 
@@ -95,10 +92,27 @@ const ChartPage = () => {
         <p>Total Users: <strong>{totalUser}</strong></p>
         <p>Total Clicks: <strong>{totalClickCount}</strong></p>
         <div className="d-flex justify-content-center mb-4">
-        <figure className="figure" style={{ width: '80%', maxHeight: '500px' }}>
-          <Bar data={chartDataForView} options={{ responsive: true, maintainAspectRatio: false }} />
-        </figure>
-      </div>
+          <figure className="figure" style={{ width: '80%', maxHeight: '500px' }}>
+            <Bar 
+              data={chartDataForView} 
+              options={{ 
+                responsive: true, 
+                maintainAspectRatio: false,
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                    ticks: {
+                      stepSize: 1,
+                      callback: function(value) { 
+                        return Number.isInteger(value) ? value : null;
+                      }
+                    }
+                  }
+                }
+              }} 
+            />
+          </figure>
+        </div>
         <div className="btn-group" role="group" aria-label="Chart view options">
           <button className='btn btn-warning m-2' onClick={() => setView('daily')}>Daily</button>
           <button className='btn btn-success m-2' onClick={() => setView('quarterly')}>Quarterly</button>
@@ -124,8 +138,8 @@ const ChartPage = () => {
                   All Months
                 </button>
               </li>
-              {monthNames.map((month, index) => (
-                <li key={index}>
+              {monthNames.map((month, i) => (
+                <li key={i}>
                   <button 
                     className="dropdown-item" 
                     onClick={() => setSelectedMonth(month)}
@@ -138,7 +152,6 @@ const ChartPage = () => {
           </div>
         )}
       </div>
-      
     </div>
   );
 };

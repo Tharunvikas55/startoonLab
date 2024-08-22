@@ -24,14 +24,13 @@ connectDB();
 // Create Admin User
 createAdmin(); 
 
-// app.get('/api/', (req, res,next) => res.json({message:"Hello world"}));
-
 // Routes
-app.use(authRoutes);
-app.use(userRoutes);  
+app.use('/api', authRoutes);
+app.use('/api', userRoutes);  // Example user routes
 
 // Default route
+app.get('/', (req, res) => res.send('Running'));
 
 // Start server
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Server is running on http://localhost:${PORT}`));
