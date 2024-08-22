@@ -3,6 +3,7 @@ const { jwtAccessTokenSecret, jwtRefreshTokenSecret } = require('../config/auth'
 const UserModel = require('../models/User');
 const { renewToken } = require('../utils/tokenUtils');
 
+// Middleware for Verifying User
 const verifyUser = async (req, res, next) => {
     const accessToken = req.cookies.accessToken;
 
@@ -25,6 +26,7 @@ const verifyUser = async (req, res, next) => {
     });
 };
 
+// Middleware for Checking Admin Role
 const isAdmin = (req, res, next) => {
     if (!req.isAdmin) return res.status(403).json({ valid: false, message: "Unauthorized Access" });
     next();
