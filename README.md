@@ -1,4 +1,55 @@
-# startoonLab Assignment
+# StartoonLab Assignment
+
+This project is a full-stack web application developed as part of an assignment for StartoonLab. Follow the instructions below to set up and run the application on your local machine.
+
+## Getting Started
+
+### Backend Setup
+
+1. **Clone or Download**  
+   - Clone the repository or download the ZIP file and extract the contents.
+
+2. **Install Dependencies**  
+   - Navigate to the backend directory and run the following command to install the necessary packages:
+     ```bash
+     npm install
+     ```
+
+3. **Environment Variables**  
+   - Create a `.env` file in the backend directory and define the required environment variables.
+
+4. **Run the Server**  
+   - Start the backend server using the following command:
+     ```bash
+     npm start
+     ```
+
+### Frontend Setup
+
+1. **Install Dependencies**  
+   - Navigate to the frontend directory and run the following command to install the necessary packages:
+     ```bash
+     npm install
+     ```
+
+2. **Run the Application**  
+   - Start the React application using the following command:
+     ```bash
+     npm start
+     ```
+
+## Additional Information
+
+- Ensure that both the backend server and frontend React app are running simultaneously.
+- The application will be accessible through the browser at the default port configured in the React app (usually `http://localhost:3000`).
+
+## Contributing
+
+If you wish to contribute to this project, please fork the repository and submit a pull request with your changes.
+
+---
+
+Happy Coding!
 
 
 ![image](https://github.com/user-attachments/assets/90b94beb-a094-4fc3-b606-8b7ff3fff91b)
