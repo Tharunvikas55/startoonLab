@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const UserModel = require('../models/User');
 
-const createAdmin = async () => {
+const createAdmin = async (req,res,next) => {
     try {
         const adminExists = await UserModel.findOne({ email: 'admin@email.com' });
         if (!adminExists) {
