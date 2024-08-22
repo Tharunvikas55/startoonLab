@@ -4,9 +4,9 @@ const { login, register, logout } = require('../controllers/authController');
 
 const router = express.Router();
 
+router.get('/',(req, res,next) => res.json({message:"Hello world"}));
 router.post('/login', login);
 router.post('/register', register);
 router.post('/logout', logout);
-router.get('/',(req, res,next) => res.json({message:"Hello world"}))
 
 module.exports = router;
