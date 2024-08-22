@@ -11,7 +11,7 @@ const AdminDashboard = () => {
   const [totalUser, setTotalUser] = useState(0);
   const [totalClickCount, setTotalClickCount] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [searchParams, setSearchParams] =  useSearchParams()
+  const [searchParams] = useSearchParams();  // Removed setSearchParams as it's unused
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const AdminDashboard = () => {
   
     fetchUsers();
   }, [navigate, searchParams]);
-  
+
   const formatDataForChart = () => {
     const countsByDate = {};
     users.forEach(user => {
@@ -59,20 +59,6 @@ const AdminDashboard = () => {
   if (loading) {
     return <div>Loading...</div>;
   }
-
-  const handleLogout = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axios.post('http://localhost:3001/api/logout');
-      if (res.data.success) {
-        navigate('/login');
-      } else {
-        console.log("Logout failed:", res.data.message);
-      }
-    } catch (err) {
-      console.log("Error during logout:", err);
-    }
-  };
 
   return (
     <div className="container mt-5">
