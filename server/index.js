@@ -24,12 +24,13 @@ connectDB();
 // Create Admin User
 createAdmin(); 
 
+app.get('/', (req, res) => res.json({message:"Hello world"}));
+
 // Routes
 app.use('/api', authRoutes);
 app.use('/api', userRoutes);  
 
 // Default route
-app.get('/', (req, res) => res.json({message:"Hello world"}));
 
 // Start server
 const PORT = process.env.PORT;
