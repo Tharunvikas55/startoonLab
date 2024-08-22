@@ -1,10 +1,10 @@
-# StartoonLab Assignment
+# 📦 StartoonLab Assignment
 
 This project is a full-stack web application developed as part of an assignment for StartoonLab. Follow the instructions below to set up and run the application on your local machine.
 
-## Getting Started
+## 🚀 Getting Started
 
-### Backend Setup
+### 🔧 Backend Setup
 
 1. **Clone or Download**  
    - Clone the repository or download the ZIP file and extract the contents.
@@ -24,7 +24,7 @@ This project is a full-stack web application developed as part of an assignment 
      npm start
      ```
 
-### Frontend Setup
+### 🌐 Frontend Setup
 
 1. **Install Dependencies**  
    - Navigate to the frontend directory and run the following command to install the necessary packages:
@@ -38,29 +38,18 @@ This project is a full-stack web application developed as part of an assignment 
      npm start
      ```
 
-## Additional Information
+## 🖼️ Sample Screenshots
 
-- Ensure that both the backend server and frontend React app are running simultaneously.
-- The application will be accessible through the browser at the default port configured in the React app (usually `http://localhost:3000`).
-
-## Contributing
-
-If you wish to contribute to this project, please fork the repository and submit a pull request with your changes.
-
----
-
-Happy Coding!
-
-
+Below are some screenshots of the application in action:
 ![image](https://github.com/user-attachments/assets/90b94beb-a094-4fc3-b606-8b7ff3fff91b)
 
 Sign Up Page
 
 ![image](https://github.com/user-attachments/assets/fb9abace-2fc4-46e7-9ec4-d66370c90569)
 
-Admin Login
+1. **Admin Login Page** 
 
-![image](https://github.com/user-attachments/assets/d8e10e1f-cfe5-4183-8849-819352f5e029)
+![Login](https://github.com/user-attachments/assets/d8e10e1f-cfe5-4183-8849-819352f5e029)
 
 View All registered Users
 
@@ -87,3 +76,18 @@ User Login
 ![image](https://github.com/user-attachments/assets/e255556e-3238-48e6-9f9e-cc0e91019749)
 
 User Profile Page
+
+
+
+## 📚 Additional Information
+
+- Ensure that both the backend server and frontend React app are running simultaneously.
+- The application will be accessible through the browser at the default port configured in the React app (usually `http://localhost:3000`).
+
+## 🤝 Contributing
+
+If you wish to contribute to this project, please fork the repository and submit a pull request with your changes.
+
+---
+
+🎉 **Happy Coding!**
