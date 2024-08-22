@@ -28,7 +28,6 @@ createAdmin();
 
 // Routes
 app.use(authRoutes);
-
 app.use(userRoutes);  
 
 // Default route
