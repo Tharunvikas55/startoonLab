@@ -26,11 +26,11 @@ createAdmin();
 
 // Routes
 app.use('/api', authRoutes);
-app.use('/api', userRoutes);  // Example user routes
+app.use('/api', userRoutes);  
 
 // Default route
 app.get('/', (req, res) => res.json({message:"Hello world"}));
 
 // Start server
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`Server is running on http://localhost:${PORT}`));
