@@ -24,7 +24,7 @@ connectDB();
 // Create Admin User
 createAdmin(); 
 
-app.get('/', (req, res) => res.json({message:"Hello world"}));
+app.get('/api/', (req, res,next) => res.json({message:"Hello world"}));
 
 // Routes
 app.use('/api', authRoutes);
