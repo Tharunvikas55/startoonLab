@@ -7,7 +7,7 @@ const createAdmin = require('./utils/adminSetup');
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 
-const path = require('path');
+// const path = require('path');
 
 const app = express();
 
@@ -23,10 +23,10 @@ app.use(cookieParser());
 // Connect to DB
 connectDB();
 
- app.use(express.static(path.join(__dirname, '..', 'frontend',  'build')));
-    app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, '..', 'frontend', 'build', 'index.html'))
-    });
+ // app.use(express.static(path.join(__dirname, '..', 'frontend',  'build')));
+ //    app.get('*', (req, res) => {
+ //        res.sendFile(path.resolve(__dirname, '..', 'frontend', 'build', 'index.html'))
+ //    });
 
 // Create Admin User
 createAdmin(); 
