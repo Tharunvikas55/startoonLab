@@ -29,7 +29,7 @@ app.use('/api', authRoutes);
 app.use('/api', userRoutes);  // Example user routes
 
 // Default route
-app.get('/', (req, res) => res.send('Running'));
+app.get('/', (req, res) => res.json({message:"Hello world"}));
 
 // Start server
 const PORT = process.env.PORT || 3001;
