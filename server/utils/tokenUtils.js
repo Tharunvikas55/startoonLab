@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { jwtAccessTokenSecret, jwtRefreshTokenSecret, accessTokenExpiry, refreshTokenExpiry } = require('../config/auth');
 
+// Function to Renew Access Token
 const renewToken = (req, res) => {
     return new Promise((resolve, reject) => {
         const refreshToken = req.cookies.refreshToken;
