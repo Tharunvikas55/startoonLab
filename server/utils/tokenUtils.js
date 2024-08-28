@@ -16,7 +16,7 @@ const renewToken = (req, res) => {
                     resolve(false);
                 } else {
                     const newAccessToken = jwt.sign({ email: decoded.email, isAdmin: decoded.isAdmin }, jwtAccessTokenSecret, { expiresIn: accessTokenExpiry });
-                    res.cookie("accessToken", newAccessToken, { maxAge: 300000, httpOnly: true, secure: true, sameSite: 'strict' });
+                    res.cookie("accessToken", newAccessToken, { maxAge: 300000, httpOnly: false, secure: true, sameSite: 'None' });
                     resolve(true);
                 }
             });
