@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useSearchParams } from 'react-router-dom';
 import NavBar from '../components/NavBar';
+import Cookies from 'js-cookie';
 
 const baseURL = process.env.REACT_APP_API_URL;
 //const baseURL = 'https://startoonlab-server.onrender.com';
@@ -18,8 +19,22 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
+        const token = Cookies.get('accessToken'); // Retrieve the accessToken from cookies
         const query = searchParams.toString() ? '?' + searchParams.toString() : '';
-        const res = await axios.get(baseURL+'/admin-dashboard'+query, { withCredentials: true });
+        
+        if (!token) {
+          console.error('Access token is missing!');
+          navigate('/login');
+          return;
+        }
+
+        const res = await axios.get(`${baseURL}/admin-dashboard${query}`, {
+          withCredentials: true,
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
         if (res.data.valid) {
           setUsers(res.data.users);
           setTotalUser(res.data.users.length);
@@ -32,15 +47,12 @@ const AdminDashboard = () => {
       } catch (err) {
         // Log more detailed error information
         if (err.response) {
-          // The request was made, and the server responded with a status code that falls out of the range of 2xx
           console.error('Error response:', err.response.data);
           console.error('Error status:', err.response.status);
           console.error('Error headers:', err.response.headers);
         } else if (err.request) {
-          // The request was made, but no response was received
           console.error('Error request:', err.request);
         } else {
-          // Something happened in setting up the request that triggered an Error
           console.error('Error message:', err.message);
         }
         console.error('Error config:', err.config);
