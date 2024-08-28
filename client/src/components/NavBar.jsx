@@ -3,8 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Search from "./Search";
 
-//const baseURL = process.env.REACT_APP_API_URL;
-const baseURL = 'https://startoonlab-server.onrender.com';
+const baseURL = process.env.REACT_APP_API_URL;
+//const baseURL = 'https://startoonlab-server.onrender.com';
 const NavBar = ({ formatDataForChart, totalUser,totalClickCount }) => {
   const navigate = useNavigate();
 
