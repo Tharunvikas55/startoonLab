@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 //const baseURL = process.env.REACT_APP_API_URL;
-const baseURL = 'https://startoonlab-server.onrender.com/api';
+const baseURL = 'https://startoonlab-server.onrender.com';
 
 const Register = () => {
     const [name, setName] = useState()
