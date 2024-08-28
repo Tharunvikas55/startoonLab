@@ -23,7 +23,10 @@ const AdminDashboard = () => {
         const query = searchParams.toString() ? '?' + searchParams.toString() : '';
         console.log('Cookies:', Cookies.get());  // Logs all cookies
 
-        
+         const allCookies = Cookies.get();
+      console.log('All Cookies:', allCookies); // Check all cookies
+      //const token = Cookies.get('accessToken');
+      console.log('Access Token:', token); // Check the specific token
         if (!token) {
           console.error('Access token is missing!');
           navigate('/login');
