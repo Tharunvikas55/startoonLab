@@ -21,6 +21,8 @@ const AdminDashboard = () => {
       try {
         const token = Cookies.get('accessToken'); // Retrieve the accessToken from cookies
         const query = searchParams.toString() ? '?' + searchParams.toString() : '';
+        console.log('Cookies:', Cookies.get());  // Logs all cookies
+
         
         if (!token) {
           console.error('Access token is missing!');
