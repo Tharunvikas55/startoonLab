@@ -31,12 +31,12 @@ connectDB();
 // Create Admin User
 createAdmin(); 
 
+app.get('/api/1', (req, res) => res.send('Running'));
 // Routes
 app.use('/api', authRoutes);
 app.use('/api', userRoutes);  // Example user routes
 
 // Default route
-app.get('/', (req, res) => res.send('Running'));
 
 // Start server
 const PORT = process.env.PORT || 3001;
