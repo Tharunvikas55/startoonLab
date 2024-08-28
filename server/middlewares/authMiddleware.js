@@ -13,16 +13,27 @@ const verifyUser = async (req, res, next) => {
         return res.status(403).json({ valid: false, message: "Invalid or missing access token" });
     }
 
-    jwt.verify(accessToken, jwtAccessTokenSecret, (err, decoded) => {
-        if (err) {
-            const tokenRefreshed = renewToken(req, res);
-            if (tokenRefreshed) return next();
-            return res.status(403).json({ valid: false, message: "Invalid access token" });
-        }
+    // jwt.verify(accessToken, jwtAccessTokenSecret, (err, decoded) => {
+    //     if (err) {
+    //         const tokenRefreshed = renewToken(req, res);
+    //         if (tokenRefreshed) return next();
+    //         return res.status(403).json({ valid: false, message: "Invalid access token" });
+    //     }
 
-        req.email = decoded.email;
-        req.isAdmin = decoded.isAdmin;
-        next();
+    //     req.email = decoded.email;
+    //     req.isAdmin = decoded.isAdmin;
+    //     next();
+
+    jwt.verify(accessToken, jwtAccessTokenSecret, async (err, decoded) => {
+    if (err) {
+        const tokenRefreshed = await renewToken(req, res);
+        if (tokenRefreshed) return next();
+        return res.status(403).json({ valid: false, message: "Invalid access token" });
+    }
+    req.email = decoded.email;
+    req.isAdmin = decoded.isAdmin;
+    next();
+});
     });
 };
 
