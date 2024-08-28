@@ -19,7 +19,7 @@ const AdminDashboard = () => {
     const fetchUsers = async () => {
       try {
         const query = searchParams.toString() ? '?' + searchParams.toString() : '';
-        const res = await axios.get(`${baseURL}/admin-dashboard${query}`, { withCredentials: true });
+        const res = await axios.get(baseURL+'/admin-dashboard'+query, { withCredentials: true });
         if (res.data.valid) {
           setUsers(res.data.users);
           setTotalUser(res.data.users.length);
