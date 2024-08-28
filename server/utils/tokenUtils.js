@@ -16,7 +16,7 @@ const renewToken = (req, res) => {
                     resolve(false);
                 } else {
                     const newAccessToken = jwt.sign({ email: decoded.email, isAdmin: decoded.isAdmin }, jwtAccessTokenSecret, { expiresIn: accessTokenExpiry });
-                    res.cookie("accessToken", newAccessToken, { maxAge: 300000, httpOnly: false, secure: true, sameSite: 'None' });
+                    res.cookie("accessToken", newAccessToken, { maxAge: 300000, httpOnly: false, secure: process.env.NODE_ENV === 'production', sameSite: 'None' });
                     resolve(true);
                 }
             });
