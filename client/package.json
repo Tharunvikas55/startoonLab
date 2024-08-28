@@ -18,7 +18,8 @@
     "react-lottie": "^1.2.4",
     "react-router-dom": "^6.26.1",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "js-cookie": "^3.0.1", 
   },
   "scripts": {
     "start": "react-scripts start",
