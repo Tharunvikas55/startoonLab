@@ -14,10 +14,13 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cors({
-    origin: [process.env.CLIENT_ORIGIN],
+    origin: 'https://startoon-lab-client.vercel.app',
     methods: ["GET", 'POST', 'PUT', 'DELETE'],
-    credentials: true
+    credentials: true,
 }));
+    // origin: [process.env.CLIENT_ORIGIN],
+
+app.use(cors(corsOptions));
 app.use(cookieParser());
 
 // Connect to DB
