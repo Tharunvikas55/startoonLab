@@ -20,7 +20,7 @@ app.use(cors({
 }));
     // origin: [process.env.CLIENT_ORIGIN],
 
-app.use(cors(corsOptions));
+//app.use(cors(corsOptions));
 app.use(cookieParser());
 
 // Connect to DB
