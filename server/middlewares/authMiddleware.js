@@ -34,7 +34,7 @@ const verifyUser = async (req, res, next) => {
     req.isAdmin = decoded.isAdmin;
     next();
 });
-    });
+    
 };
 
 // Middleware for Checking Admin Role
