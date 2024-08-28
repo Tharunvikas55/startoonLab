@@ -39,8 +39,8 @@ app.get('/', (req, res, next) => {
 });
 
 // Routes
-app.use(authRoutes);
-app.use(userRoutes);  // Example user routes
+app.use('/api',authRoutes);
+app.use('/api',userRoutes);  // Example user routes
 
 // Default route
 
