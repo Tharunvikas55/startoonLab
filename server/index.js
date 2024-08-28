@@ -31,7 +31,7 @@ connectDB();
 // Create Admin User
 createAdmin(); 
 
-app.get('/api/1', (req, res) => res.send('Running'));
+//app.get('/api/1', (req, res) => res.send('Running'));
 // Routes
 app.use('/api', authRoutes);
 app.use('/api', userRoutes);  // Example user routes
