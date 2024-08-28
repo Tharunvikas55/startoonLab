@@ -1,6 +1,6 @@
 module.exports = {
-    jwtAccessTokenSecret: process.env.JWT_ACCESS_TOKEN_SECRET,
-    jwtRefreshTokenSecret: process.env.JWT_REFRESH_TOKEN_SECRET,
-    accessTokenExpiry: process.env.ACCESS_TOKEN_EXPIRY,
-    refreshTokenExpiry: process.env.REFRESH_TOKEN_EXPIRY,
+    jwtAccessTokenSecret: "Tharun-access-token-secret-key",
+    jwtRefreshTokenSecret: "Tharun-refresh-token-secret-key",
+    accessTokenExpiry: "5m",
+    refreshTokenExpiry: "30m",
 };
