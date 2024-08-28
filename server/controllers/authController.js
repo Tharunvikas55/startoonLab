@@ -33,41 +33,71 @@ const { jwtAccessTokenSecret, jwtRefreshTokenSecret, accessTokenExpiry, refreshT
 
 
 const login = async (req, res, next) => {
-    const { email, password } = req.body;
-    const isProduction = process.env.NODE_ENV === 'production'; // Check if running in production environment
+    // const { email, password } = req.body;
+    // const isProduction = process.env.NODE_ENV === 'production'; // Check if running in production environment
+
+    // try {
+    //     const user = await UserModel.findOne({ email });
+    //     if (!user) return res.json({ Login: false, message: "User account not found" });
+
+    //     const isMatch = await bcrypt.compare(password, user.password);
+    //     if (!isMatch) return res.json({ Login: false, message: "Password Incorrect" });
+
+    //     const accessToken = jwt.sign({ email, isAdmin: user.isAdmin }, jwtAccessTokenSecret, { expiresIn: accessTokenExpiry });
+    //     const refreshToken = jwt.sign({ email, isAdmin: user.isAdmin }, jwtRefreshTokenSecret, { expiresIn: refreshTokenExpiry });
+
+    //     // Set cookies with the `secure` flag based on the environment
+    //     res.cookie("accessToken", accessToken, { 
+    //         maxAge: 300000, 
+    //         httpOnly: true, 
+    //         secure: isProduction, 
+    //         sameSite: 'strict' 
+    //     });
+    //     res.cookie("refreshToken", refreshToken, { 
+    //         maxAge: 1800000, 
+    //         httpOnly: true, 
+    //         secure: isProduction, 
+    //         sameSite: 'strict' 
+    //     });
+
+    //     user.count += 1;
+    //     user.lastLoginDate = new Date();
+    //     await user.save();
+
+    //     res.json({ Login: true, user: { name: user.name, email: user.email, isAdmin: user.isAdmin } });
+    // } catch (err) {
+    //     console.error("Error in login process:", err);
+    //     res.status(500).json({ Login: false, message: "Error during login process", error: err.message });
+    // }
 
     try {
-        const user = await UserModel.findOne({ email });
-        if (!user) return res.json({ Login: false, message: "User account not found" });
+        const { email, password } = req.body;
 
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) return res.json({ Login: false, message: "Password Incorrect" });
+        // Validate user credentials (this is just an example)
+        const user = await User.findOne({ email });
+        if (!user || !user.isPasswordValid(password)) {
+            return res.status(401).json({ message: 'Invalid email or password' });
+        }
 
-        const accessToken = jwt.sign({ email, isAdmin: user.isAdmin }, jwtAccessTokenSecret, { expiresIn: accessTokenExpiry });
-        const refreshToken = jwt.sign({ email, isAdmin: user.isAdmin }, jwtRefreshTokenSecret, { expiresIn: refreshTokenExpiry });
+        // Generate access token (using a JWT, for example)
+        const accessToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '5m' });
 
-        // Set cookies with the `secure` flag based on the environment
+        // Determine if in production environment
+        const isProduction = process.env.NODE_ENV === 'production';
+
+        // Set the access token as a cookie
         res.cookie("accessToken", accessToken, { 
-            maxAge: 300000, 
-            httpOnly: true, 
-            secure: isProduction, 
-            sameSite: 'strict' 
-        });
-        res.cookie("refreshToken", refreshToken, { 
-            maxAge: 1800000, 
+            maxAge: 300000, // 5 minutes
             httpOnly: true, 
             secure: isProduction, 
             sameSite: 'strict' 
         });
 
-        user.count += 1;
-        user.lastLoginDate = new Date();
-        await user.save();
-
-        res.json({ Login: true, user: { name: user.name, email: user.email, isAdmin: user.isAdmin } });
+        // Respond with a success message or user data
+        res.json({ message: 'Login successful', user });
     } catch (err) {
-        console.error("Error in login process:", err);
-        res.status(500).json({ Login: false, message: "Error during login process", error: err.message });
+        console.error(err);
+        res.status(500).json({ message: 'Internal server error' });
     }
 };
 
